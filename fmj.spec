@@ -11,7 +11,7 @@ Summary:		Free replacement for the JMF (Java Media Framework)
 Version:		20071014
 Release:		%mkrel 0.0.1
 License:		GPL
-Group:			Development/Libraries/Java
+Group:			Development/Java
 URL:			http://fmj.sourceforge.net/
 Source0:		%{name}.tar.bz2
 Source1:		%{name}.png
@@ -59,14 +59,14 @@ platforms.
 
 %package javadoc
 Summary:	Javadoc for fmj
-Group:		Documentation/HTML
+Group:		Development/Java
 
 %description javadoc
 Javadoc for fmj.
 
 %package demo
 Summary:	Some examples for fmj
-Group:		Documentation/HTML
+Group:		Development/Java
 Requires:	java-devel >= 1.5
 Requires:	%{name}
 
