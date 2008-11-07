@@ -34,7 +34,7 @@ Requires:		tritonus-shared
 Requires:		vorbisspi
 BuildRequires:	ant
 BuildRequires:	ffmpeg-java
-BuildRequires:  libgstreamer0.10-devel
+BuildRequires:  gstreamer0.10-devel
 BuildRequires:	java-rpmbuild >= 1.5
 BuildRequires:	jlayer
 BuildRequires:	jorbis
