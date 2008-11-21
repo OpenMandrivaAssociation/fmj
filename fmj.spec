@@ -1,40 +1,31 @@
-# Copyright (c) 2006-2007 oc2pus
-# This file and all modifications and additions to the pristine
-# package are under the same license as the package itself.
-#
-# Please submit bugfixes or comments to toni@links2linux.de
-
-# norootforbuild
-
-Name:			fmj
-Summary:		Free replacement for the JMF (Java Media Framework)
-Version:		20071014
-Release:		%mkrel 0.0.1
-License:		GPL
-Group:			Development/Java
-URL:			http://fmj.sourceforge.net/
-Source0:		%{name}.tar.bz2
-Source1:		%{name}.png
-BuildRoot:		%{_tmppath}/%{name}-%{version}-build
-Requires:		gstreamer0.10-ffmpeg
-Requires:		gstreamer0.10-plugins-base
-Requires:		gstreamer0.10-plugins-good
-Requires:		gstreamer0.10-plugins-ugly
-Requires:		ffmpeg-java
-Requires:		java >= 1.5
-Requires:		jlayer
-Requires:		jorbis
-Requires:		jpackage-utils >= 1.5
-Requires:		jre >= 1.5
-Requires:		jspeex
+Summary:	Free replacement for the JMF (Java Media Framework)
+Name:		fmj
+Version:	20071014
+Release:	%mkrel 0.0.2
+License:	LGPLv3
+Group:		Development/Java
+URL:		http://fmj.sourceforge.net/
+Source0:	%{name}.tar.bz2
+Source1:	%{name}.png
+Requires:	gstreamer0.10-ffmpeg
+Requires:	gstreamer0.10-plugins-base
+Requires:	gstreamer0.10-plugins-good
+Requires:	gstreamer0.10-plugins-ugly
+Requires:	ffmpeg-java
+Requires:	java >= 1.5
+Requires:	jlayer
+Requires:	jorbis
+Requires:	jpackage-utils >= 1.5
+Requires:	jre >= 1.5
+Requires:	jspeex
 #Requires:		liquidlnf
-Requires:		mp3spi
-Requires:		theora-java
-Requires:		tritonus-shared
-Requires:		vorbisspi
+Requires:	mp3spi
+Requires:	theora-java
+Requires:	tritonus-shared
+Requires:	vorbisspi
 BuildRequires:	ant
 BuildRequires:	ffmpeg-java
-BuildRequires:  gstreamer0.10-devel
+BuildRequires:	gstreamer0.10-devel
 BuildRequires:	java-rpmbuild >= 1.5
 BuildRequires:	jlayer
 BuildRequires:	jorbis
@@ -48,6 +39,7 @@ BuildRequires:	update-alternatives
 #BuildRequires:	update-desktop-files
 BuildRequires:	vorbisspi
 BuildRequires:	xml-commons-apis
+BuildRoot:	%{_tmppath}/%{name}-%{version}-buildroot
 
 %description
 FMJ is an open-source project with the goal of providing a
@@ -173,7 +165,7 @@ done
 	src/net/sf/fmj/utility/FmjStartup.java
 
 %build
-export LANG=de_DE
+export LANG=C
 export CLASSPATH=$(build-classpath tritonus/tritonus-shared)
 %ant -Dbuild.sysclasspath=first dist
 
