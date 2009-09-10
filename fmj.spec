@@ -1,7 +1,7 @@
 Summary:	Free replacement for the JMF (Java Media Framework)
 Name:		fmj
 Version:	20071014
-Release:	%mkrel 0.0.2
+Release:	%mkrel 0.0.3
 License:	LGPLv3
 Group:		Development/Java
 URL:		http://fmj.sourceforge.net/
