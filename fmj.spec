@@ -1,11 +1,17 @@
 Summary:	Free replacement for the JMF (Java Media Framework)
 Name:		fmj
-Version:	20071014
-Release:	%mkrel 0.0.4
+# Could need an epoch at some point... just updated from 2007* to 2011*
+Version:	20110107
+Release:	%mkrel 1
 License:	LGPLv3
 Group:		Development/Java
-URL:		http://fmj.sourceforge.net/
-Source0:	%{name}.tar.bz2
+URL:		http://fmj-sf.net/
+# cvs -d:pserver:anonymous@fmj.cvs.sourceforge.net:/cvsroot/fmj login
+# cvs -z3 -d:pserver:anonymous@fmj.cvs.sourceforge.net:/cvsroot/fmj co -P fmj
+# cp -far fmj fmj-20110107
+# find fmj-20110107 -name CVS -type d -exec rm -fr {} \; 2> /dev/null
+# tar Jcf fmj-20110107.tar.xz fmj-20110107
+Source0:	%{name}-%{version}.tar.xz
 Source1:	%{name}.png
 Requires:	gstreamer0.10-ffmpeg
 Requires:	gstreamer0.10-plugins-base
@@ -18,7 +24,7 @@ Requires:	jorbis
 Requires:	jpackage-utils >= 1.5
 Requires:	jre >= 1.5
 Requires:	jspeex
-#Requires:		liquidlnf
+Requires:	liquidlnf
 Requires:	mp3spi
 Requires:	theora-java
 Requires:	tritonus-shared
@@ -66,7 +72,7 @@ Requires:	%{name}
 Some examples (javacode) for fmj.
 
 %prep
-%setup -q -n %{name}
+%setup -q
 # the build.xml needs every time a rediff, so use sed instead of a patch ... :)
 %__sed -i -e 's|<src path="src.ffmpeg-java"/>||g' \
 	build.xml
