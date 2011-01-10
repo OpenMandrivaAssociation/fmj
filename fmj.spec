@@ -2,7 +2,7 @@ Summary:	Free replacement for the JMF (Java Media Framework)
 Name:		fmj
 # Could need an epoch at some point... just updated from 2007* to 2011*
 Version:	20110107
-Release:	%mkrel 1
+Release:	%mkrel 2
 License:	LGPLv3
 Group:		Development/Java
 URL:		http://fmj-sf.net/
@@ -27,7 +27,7 @@ Requires:	jspeex
 Requires:	liquidlnf
 Requires:	mp3spi
 Requires:	theora-java
-Requires:	tritonus-shared
+Requires:	tritonus
 Requires:	vorbisspi
 BuildRequires:	ant
 BuildRequires:	ffmpeg-java
@@ -42,7 +42,6 @@ BuildRequires:	mp3spi
 BuildRequires:	theora-java
 BuildRequires:	tritonus-shared
 BuildRequires:	update-alternatives
-#BuildRequires:	update-desktop-files
 BuildRequires:	vorbisspi
 BuildRequires:	xml-commons-apis
 BuildRoot:	%{_tmppath}/%{name}-%{version}-buildroot
@@ -246,8 +245,8 @@ check_java_env
 set_jvm_dirs
 set_options -Djava.library.path="@LIBRARY_PATH@" -Djava.util.logging.config.file="%{_javadir}/%{name}/logging.properties"
 
-CLASSPATH=\`build-classpath %{name} jl jorbis jspeex liquidlnf mp3spi tritonus_share vorbisspi\`
-MAIN_CLASS="net.sf.fmj.ui.@MAIN_CLASS@"
+CLASSPATH=\`build-classpath %{name} jl jorbis jspeex liquidlnf mp3spi tritonus vorbisspi\`
+MAIN_CLASS="net.sf.fmj.@BASE_CLASS@.@MAIN_CLASS@"
 export LD_LIBRARY_PATH=@LIBRARY_PATH@:\$LD_LIBRARY_PATH
 run "\$1"
 EOF
@@ -267,6 +266,16 @@ done
 %__sed -i -e 's|@MAIN_CLASS@|FmjTranscode|g' \
 	%{buildroot}%{_bindir}/%{name}-transcode.sh
 
+# set base-class
+%__sed -i -e 's|@BASE_CLASS@|apps.play|g' \
+	%{buildroot}%{_bindir}/%{name}-play.sh
+%__sed -i -e 's|@BASE_CLASS@|apps.transcode|g' \
+	%{buildroot}%{_bindir}/%{name}-transcode.sh
+%__sed -i -e 's|@BASE_CLASS@|ui|g' \
+	%{buildroot}%{_bindir}/%{name}-registry.sh
+%__sed -i -e 's|@BASE_CLASS@|ui|g' \
+	%{buildroot}%{_bindir}/%{name}-studio.sh
+
 # set library-paths
 for i in registry studio transcode play; do
 %__sed -i -e 's|@LIBRARY_PATH@|%{_libdir}/%{name}:%{_libdir}|g' \
@@ -277,36 +286,6 @@ done
 %__install -dm 755 %{buildroot}%{_datadir}/pixmaps
 %__install -m 644 %{SOURCE1} \
 	%{buildroot}%{_datadir}/pixmaps
-
-%if 0
-# menu
-%__install -dm 755 %{buildroot}%{_datadir}/applications
-%__cat > %{buildroot}%{_datadir}/applications/%{name}-studio.desktop <<EOF
-[Desktop Entry]
-Encoding=UTF-8
-Type=Application
-Exec=%{name}-studio.sh
-Icon=%{name}.png
-Terminal=false
-Name=FMJ-Studio
-Comment=FMJ-Studio
-Categories=AudioVideo;Player;
-EOF
-%suse_update_desktop_file %{name}-studio AudioVideo Player
-
-%__cat > %{buildroot}%{_datadir}/applications/%{name}-registry.desktop <<EOF
-[Desktop Entry]
-Encoding=UTF-8
-Type=Application
-Exec=%{name}-registry.sh
-Icon=%{name}.png
-Terminal=false
-Name=FMJ-Registry Editor
-Comment=FMJ-Registry Editor
-Categories=AudioVideo;Music;
-EOF
-%suse_update_desktop_file %{name}-registry AudioVideo Music
-%endif
 
 %clean
 [ -d %{buildroot} -a "%{buildroot}" != "" ] && %__rm -rf %{buildroot}
@@ -326,7 +305,6 @@ EOF
 %dir %{_datadir}/%{name}
 %{_datadir}/%{name}/*
 %{_datadir}/pixmaps/*.png
-#%{_datadir}/applications/%{name}-*.desktop
 
 %files javadoc
 %defattr(0644,root,root,0755)
