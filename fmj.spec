@@ -2,7 +2,7 @@ Summary:	Free replacement for the JMF (Java Media Framework)
 Name:		fmj
 # Could need an epoch at some point... just updated from 2007* to 2011*
 Version:	20110107
-Release:	%mkrel 2
+Release:	3
 License:	LGPLv3
 Group:		Development/Java
 URL:		http://fmj-sf.net/
@@ -44,7 +44,7 @@ BuildRequires:	tritonus-shared
 BuildRequires:	update-alternatives
 BuildRequires:	vorbisspi
 BuildRequires:	xml-commons-apis
-BuildRoot:	%{_tmppath}/%{name}-%{version}-buildroot
+
 
 %description
 FMJ is an open-source project with the goal of providing a
@@ -287,11 +287,8 @@ done
 %__install -m 644 %{SOURCE1} \
 	%{buildroot}%{_datadir}/pixmaps
 
-%clean
-[ -d %{buildroot} -a "%{buildroot}" != "" ] && %__rm -rf %{buildroot}
 
 %files
-%defattr(-,root,root)
 %doc *.txt LICENSE README
 %{_bindir}/%{name}-*.sh
 %dir %{_javadir}/%{name}
@@ -307,11 +304,9 @@ done
 %{_datadir}/pixmaps/*.png
 
 %files javadoc
-%defattr(0644,root,root,0755)
 %doc %{_javadocdir}/%{name}-%{version}
 %doc %{_javadocdir}/%{name}
 
 %files demo
-%defattr(-,root,root)
 %dir %{_datadir}/%{name}
 %{_datadir}/%{name}/src.examples.*/*
