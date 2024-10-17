@@ -5,7 +5,7 @@ Version:	20110107
 Release:	3
 License:	LGPLv3
 Group:		Development/Java
-URL:		http://fmj-sf.net/
+URL:		https://fmj-sf.net/
 # cvs -d:pserver:anonymous@fmj.cvs.sourceforge.net:/cvsroot/fmj login
 # cvs -z3 -d:pserver:anonymous@fmj.cvs.sourceforge.net:/cvsroot/fmj co -P fmj
 # cp -far fmj fmj-20110107
